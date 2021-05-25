@@ -94,11 +94,5 @@ elif include == "PATCH":
 else: 
     releases = allReleases
 
-
-
-output = """- {}""".format("\n - ".join(releases[1:]))
-
-
-
-print(output)
-print(f"::set-output name=releases::{output}")
+print(releases)
+print(f"::set-output name=releases::{releases}")
