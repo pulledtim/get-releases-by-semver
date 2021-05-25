@@ -40,7 +40,7 @@ for release in repository.get_releases():
             majorDict[version.major] = version
         continue
     elif include == "MINOR":
-        versionKey = "{major}-{minor}".format(version.major, version.minor)
+        versionKey = "{}-{}".format(version.major, version.minor)
         if versionKey in minorDict:
             if semver.compare(minorDict[versionKey], version) > -1:
                 minorDict[versionKey] = version
@@ -48,7 +48,7 @@ for release in repository.get_releases():
             minorDict[versionKey] = version
         continue
     elif include == "PATCH":
-        versionKey = "{major}-{minor}-{patch}".format(version.major, version.minor, version.patch)
+        versionKey = "{}-{}-{}".format(version.major, version.minor, version.patch)
         if versionKey in patchDict:
             if semver.compare(patchDict[versionKey], version) > -1:
                 patchDict[versionKey] = version
