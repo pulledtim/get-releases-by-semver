@@ -12,6 +12,10 @@ This action retrieves a list of release-versions from the requested repository. 
 
 **Required** Lowest field to be included. Possible values: ["MAJOR","MINOR","PATCH","ALL"]
 
+### `versionField`
+
+Field to be used for extracting the version. Possible values: ["TITLE", "TAG-NAME"] Default: ```TITLE```
+
 ### `minMajor`
 
 The minimum major version to be included. Default: ```0```

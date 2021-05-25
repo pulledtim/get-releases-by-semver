@@ -6,16 +6,23 @@ import os
 import sys
 
 supportedIncludes = ["MAJOR","MINOR", "PATCH", "ALL"]
+supportedVersionFields = ["TITLE", "TAG-NAME"]
 
 repo = os.environ['REPOSITORY']
 include = os.environ['INCLUDE']
 excludePrereleases = os.environ['EXCLUDE_PRE']
+versionField = os.environ['VERSION_FIELD']
 minMajor = os.environ['MIN_MAJOR']
 minMinor = os.environ['MIN_MINOR']
 minPatch = os.environ['MIN_PATCH']
 
 if include not in supportedIncludes:
     print(include + " is not a supported field.")
+    sys.exit(1)
+
+if versionField not in supportedVersionFields:
+    print(include + " is not a supported field.")
+    sys.exit(1)
 
 github = Github()
 repository = github.get_repo(repo)
@@ -28,10 +35,17 @@ patchDict = {}
 allReleases = []
 
 for release in repository.get_releases():
-    if not semver.VersionInfo.isvalid(release.title):
-        continue
+    if versionField == "TITLE":
+        if not semver.VersionInfo.isvalid(release.title):
+            continue
 
-    version = semver.VersionInfo.parse(release.title)
+        version = semver.VersionInfo.parse(release.title)
+    else: 
+        if not semver.VersionInfo.isvalid(release.tag_name):
+            continue
+
+        version = semver.VersionInfo.parse(release.tag_name)
+
     if excludePrereleases and version.prerelease is not None:
         continue
 
@@ -65,7 +79,7 @@ for release in repository.get_releases():
             patchDict[versionKey] = version
         continue
     else: 
-        allReleases.append(release.title)
+        allReleases.append(version.__str__())
 
 releases = []
 if include == "MAJOR":

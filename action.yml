@@ -11,6 +11,10 @@ inputs:
   include:
     description: 'Wich should the lowest field to be included. Possible values: ["MAJOR","MINOR","PATCH","ALL"]'
     required: true
+  versionField:
+    description: 'Field to be used for extracting the version. Possible values: ["TITLE", "TAG-NAME"]'
+    required: false
+    default: "TITLE"
   minMajor:
     description: "Minimum major version to be included." 
     required: false
@@ -33,6 +37,7 @@ runs:
   env:
     REPOSITORY: ${{ inputs.repository }}
     INCLUDE: ${{ inputs.include }}
+    VERSION_FIELD: ${{ inputs.versionField }}
     MIN_MAJOR: ${{ inputs.minMajor }}
     MIN_MINOR: ${{ inputs.minMinor }}
     MIN_PATCH: ${{ inputs.minPatch }}
