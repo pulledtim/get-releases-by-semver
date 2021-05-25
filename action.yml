@@ -1,5 +1,5 @@
-name: 'Get releases by pattern'
-description: 'Retrieve all releases by the   given pattern.'
+name: 'Get releases by semver'
+description: 'Retrieve all releases by the for the given semver config.'
 author: stefan.wiedemann@fiware.org
 branding:
   icon: 'tag'
@@ -23,6 +23,10 @@ inputs:
     description: "Minimum patch version to be included." 
     required: false
     default: "0" 
+  excludePre: 
+    description: "Should prereleases be excluded."
+    required: false
+    default: "true"
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -32,3 +36,4 @@ runs:
     MIN_MAJOR: ${{ inputs.minMajor }}
     MIN_MINOR: ${{ inputs.minMinor }}
     MIN_PATCH: ${{ inputs.minPatch }}
+    EXCLUDE_PRE: ${{ inputs.excludePre }}
