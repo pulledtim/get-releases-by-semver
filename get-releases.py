@@ -10,7 +10,7 @@ github = Github()
 repository = github.get_repo(repo)
 matching_releases = []
 for release in repository.get_releases():
-    if re.match(pattern, release.tag_name):
+    if re.match(pattern, release.title):
         matching_releases.append(release)
 
 for v in matching_releases:
