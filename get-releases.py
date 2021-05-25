@@ -22,6 +22,6 @@ repository = github.get_repo(repo)
 matching_releases = []
 
 for release in repository.get_releases():
-    print(release.title)
-    version = semver.VersionInfo.parse(release.tag)
+    print(release)
+    version = semver.VersionInfo.parse(release.title)
     print(version)
