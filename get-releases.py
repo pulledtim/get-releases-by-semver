@@ -36,6 +36,8 @@ for release in repository.get_releases():
         continue
 
     if include == "MAJOR":
+        if version.major < minMajor: 
+            continue
         if version.major in majorDict:
             if majorDict[version.major].compare(version) > -1:
                 majorDict[version.major] = version
@@ -43,6 +45,8 @@ for release in repository.get_releases():
             majorDict[version.major] = version
         continue
     elif include == "MINOR":
+        if version.major < minMajor or version.minor < minMinor: 
+            continue
         versionKey = "{}-{}".format(version.major, version.minor)
         if versionKey in minorDict:
             if minorDict[versionKey].compare(version) > -1:
@@ -51,6 +55,8 @@ for release in repository.get_releases():
             minorDict[versionKey] = version
         continue
     elif include == "PATCH":
+        if version.major < minMajor or version.minor < minMinor or version.patch < minPatch: 
+            continue
         versionKey = "{}-{}-{}".format(version.major, version.minor, version.patch)
         if versionKey in patchDict:
             if patchDict[versionKey].compare(version) > -1:
