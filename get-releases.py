@@ -9,6 +9,7 @@ supportedIncludes = ["MAJOR","MINOR", "PATCH", "ALL"]
 
 repo = os.environ['REPOSITORY']
 include = os.environ['INCLUDE']
+excludePrereleases = os.environ['EXCLUDE_PRE']
 minMajor = os.environ['MIN_MAJOR']
 minMinor = os.environ['MIN_MINOR']
 minPatch = os.environ['MIN_PATCH']
@@ -21,7 +22,50 @@ repository = github.get_repo(repo)
 
 matching_releases = []
 
+majorDict = {}
+minorDict = {}
+patchDict = {}
+allReleases = []
+
 for release in repository.get_releases():
-    print(release)
     version = semver.VersionInfo.parse(release.title)
-    print(version)
+    if excludePrereleases and version.prerelease is not None:
+        continue
+
+    if include == "MAJOR":
+        if version.major in majorDict:
+            if semver.compare(majorDict[version.major], version) > -1:
+                majorDict[version.major] = version
+        else:
+            majorDict[version.major] = version
+        continue
+    elif include == "MINOR":
+        versionKey = version.major + "-" + version.minor
+        if versionKey in minorDict:
+            if semver.compare(minorDict[versionKey], version) > -1:
+                minorDict[versionKey] = version
+        else:
+            minorDict[versionKey] = version
+        continue
+    elif include == "PATCH":
+        versionKey = version.major + "-" + version.minor + "-" + version.patch
+        if versionKey in patchDict:
+            if semver.compare(patchDict[versionKey], version) > -1:
+                patchDict[versionKey] = version
+        else:
+            patchDict[versionKey] = version
+        continue
+    else: 
+        allReleases.append(release.title)
+
+releases = []
+if include == "MAJOR":
+    releases = list(majorDict.values())
+elif include == "MINOR":
+    releases = list(minorDict.values())
+elif include == "PATCH":
+    releases = list(patchDict.values())
+else: 
+    releases = allReleases
+
+print(f"::set-output name=releases::{releases}")
