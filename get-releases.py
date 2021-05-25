@@ -34,7 +34,7 @@ for release in repository.get_releases():
 
     if include == "MAJOR":
         if version.major in majorDict:
-            if semver.compare(majorDict[version.major].str(), version) > -1:
+            if majorDict[version.major].compare(version) > -1:
                 majorDict[version.major] = version
         else:
             majorDict[version.major] = version
@@ -42,7 +42,7 @@ for release in repository.get_releases():
     elif include == "MINOR":
         versionKey = "{}-{}".format(version.major, version.minor)
         if versionKey in minorDict:
-            if semver.compare(minorDict[versionKey].str(), version) > -1:
+            if minorDict[versionKey].compare(version) > -1:
                 minorDict[versionKey] = version
         else:
             minorDict[versionKey] = version
@@ -50,7 +50,7 @@ for release in repository.get_releases():
     elif include == "PATCH":
         versionKey = "{}-{}-{}".format(version.major, version.minor, version.patch)
         if versionKey in patchDict:
-            if semver.compare(patchDict[versionKey].str(), version) > -1:
+            if patchDict[versionKey].compare(version) > -1:
                 patchDict[versionKey] = version
         else:
             patchDict[versionKey] = version
