@@ -8,12 +8,27 @@ inputs:
   repository:
     description: 'Repository to retrieve releases for.'
     required: true
-  pattern:
-    description: 'Pattern to filter releases with.'
+  include:
+    description: 'Wich should the lowest field to be included. Possible values: ["MAJOR","MINOR","PATCH","ALL"]'
     required: true
+  minMajor:
+    description: "Minimum major version to be included." 
+    required: false
+    default: "0" 
+  minMinor:
+    description: "Minimum minor version to be included." 
+    required: false
+    default: "0" 
+  minPatch:
+    description: "Minimum patch version to be included." 
+    required: false
+    default: "0" 
 runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
     REPOSITORY: ${{ inputs.repository }}
-    VERSION_PATTERN: ${{ inputs.pattern }}
+    INCLUDE: ${{ inputs.include }}
+    MIN_MAJOR: ${{ inputs.minMajor }}
+    MIN_MINOR: ${{ inputs.minMinor }}
+    MIN_PATCH: ${{ inputs.minPatch }}
