@@ -28,9 +28,9 @@ patchDict = {}
 allReleases = []
 
 for release in repository.get_releases():
-    if not semver.isValid(release.title):
+    if not semver.isvalid(release.title):
         continue
-        
+
     version = semver.VersionInfo.parse(release.title)
     if excludePrereleases and version.prerelease is not None:
         continue
