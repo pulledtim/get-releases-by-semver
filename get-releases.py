@@ -71,4 +71,5 @@ elif include == "PATCH":
 else: 
     releases = allReleases
 
+print(releases)
 print(f"::set-output name=releases::{releases}")
