@@ -1,0 +1,19 @@
+name: 'Get releases by pattern'
+description: 'Retrieve all releases by the   given pattern.'
+author: stefan.wiedemann@fiware.org
+branding:
+  icon: 'tag'
+  color: 'green'
+inputs:
+  repository:
+    description: 'Repository to retrieve releases for.'
+    required: true
+  pattern:
+    description: 'Pattern to filter releases with.'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    REPOSITORY: ${{ inputs.repository }}
+    VERSION_PATTERN: ${{ inputs.pattern }}
