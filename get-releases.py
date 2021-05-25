@@ -69,11 +69,14 @@ for release in repository.get_releases():
 
 releases = []
 if include == "MAJOR":
-    releases = list(majorDict.values())
+    for r in list(majorDict.values()):
+        releases.append(r.__str__())
 elif include == "MINOR":
-    releases = list(minorDict.values())
+    for r in list(minorDict.values()):
+        releases.append(r.__str__())
 elif include == "PATCH":
-    releases = list(patchDict.values())
+    for r in list(patchDict.values()):
+        releases.append(r.__str__())
 else: 
     releases = allReleases
 
