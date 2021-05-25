@@ -96,8 +96,7 @@ else:
 
 
 
-output = """
-         """.format("- ".join(releases[1:]))
+output = """{}""".format("- ".join(releases[1:]))
 
 
 
