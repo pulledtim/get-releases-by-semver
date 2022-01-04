@@ -93,5 +93,8 @@ if include == "PATCH":
 if not include: 
     releases = allReleases
 
+# remove duplicates
+releases = list(dict.fromkeys(releases))
+
 print(releases)
 print(f"::set-output name=releases::{releases}")
