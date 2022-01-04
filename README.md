@@ -36,9 +36,9 @@ Should pre-release versions be excluded. Default: ```true```
 ## Example usage
 
 ```yaml
-uses: wistefan/get-releases-by-pattern@master
+uses: wistefan/get-releases-by-semver@master
 with:
     include: "MINOR"
-    repository: wistefan/get-releases-by-pattern
+    repository: wistefan/get-releases-by-semver
     minMinor: "2"
 ```
