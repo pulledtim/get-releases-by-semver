@@ -5,6 +5,7 @@ import semver
 import os
 import sys
 
+
 supportedIncludes = ["MAJOR","MINOR", "PATCH", "ALL"]
 supportedVersionFields = ["TITLE", "TAG-NAME"]
 
@@ -15,6 +16,7 @@ versionField = os.environ['VERSION_FIELD']
 minMajor = os.environ['MIN_MAJOR']
 minMinor = os.environ['MIN_MINOR']
 minPatch = os.environ['MIN_PATCH']
+
 
 if include not in supportedIncludes:
     print(include + " is not a supported field.")
@@ -49,7 +51,7 @@ for release in repository.get_releases():
     if excludePrereleases and version.prerelease is not None:
         continue
 
-    if include == "MAJOR":
+    if include == "MAJOR" or include == "MINOR" or include == "PATCH":
         if int(version.major) < int(minMajor): 
             continue
         if version.major in majorDict:
@@ -58,7 +60,7 @@ for release in repository.get_releases():
         else:
             majorDict[version.major] = version
         continue
-    elif include == "MINOR":
+    elif include == "MINOR" or include == "PATCH":
         if int(version.major) < int(minMajor) or int(version.minor) < int(minMinor): 
             continue
         versionKey = "{}-{}".format(version.major, version.minor)
@@ -82,10 +84,10 @@ for release in repository.get_releases():
         allReleases.append(version.__str__())
 
 releases = []
-if include == "MAJOR":
+if include == "MAJOR" or include == "MINOR" or include == "PATCH":
     for r in list(majorDict.values()):
         releases.append(r.__str__())
-elif include == "MINOR":
+elif include == "MINOR" or include == "PATCH":
     for r in list(minorDict.values()):
         releases.append(r.__str__())
 elif include == "PATCH":
