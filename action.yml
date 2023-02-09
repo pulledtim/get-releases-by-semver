@@ -31,6 +31,9 @@ inputs:
     description: "Should prereleases be excluded."
     required: false
     default: "true"
+  token:
+    description: "Access token to be used when requesting the github-api. Its recommended to use, since the ratelimit for unauthenticated requests is 60/h while authenticated is 1000/h."
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'

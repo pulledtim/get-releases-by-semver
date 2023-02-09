@@ -26,7 +26,13 @@ if versionField not in supportedVersionFields:
     print(include + " is not a supported field.")
     sys.exit(1)
 
-github = Github()
+if "TOKEN" in os.environ: 
+    # requests with token have a ratelimit of 1000/h, while without its only 60/h
+    print("Use github api with an access token.")
+    github = Github(os.getenv("TOKEN"))
+else:
+    github = Github()
+
 repository = github.get_repo(repo)
 
 matching_releases = []
