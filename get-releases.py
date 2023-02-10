@@ -31,6 +31,7 @@ if "TOKEN" in os.environ:
     print("Use github api with an access token.")
     github = Github(os.getenv("TOKEN"))
 else:
+    print("Use github api without access token.")
     github = Github()
 
 repository = github.get_repo(repo)
