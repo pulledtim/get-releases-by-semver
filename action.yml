@@ -45,3 +45,4 @@ runs:
     MIN_MINOR: ${{ inputs.minMinor }}
     MIN_PATCH: ${{ inputs.minPatch }}
     EXCLUDE_PRE: ${{ inputs.excludePre }}
+    TOKEN: ${{ inputs.token }}
