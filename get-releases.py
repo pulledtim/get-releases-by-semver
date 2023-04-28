@@ -45,15 +45,15 @@ allReleases = []
 
 for release in repository.get_releases():
     if versionField == "TITLE":
-        if not semver.VersionInfo.isvalid(release.title):
+        if not semver.Version.is_valid(release.title):
             continue
 
-        version = semver.VersionInfo.parse(release.title)
+        version = semver.Version.parse(release.title)
     else: 
-        if not semver.VersionInfo.isvalid(release.tag_name):
+        if not semver.Version.is_valid(release.tag_name):
             continue
 
-        version = semver.VersionInfo.parse(release.tag_name)
+        version = semver.Version.parse(release.tag_name)
 
     if excludePrereleases and version.prerelease is not None:
         continue
