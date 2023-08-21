@@ -31,6 +31,10 @@ inputs:
     description: "Should prereleases be excluded."
     required: false
     default: "true"
+  excludeMajor: 
+    description: "Should some major versions be excluded."
+    required: false
+    default: ""
   token:
     description: "Access token to be used when requesting the github-api. Its recommended to use, since the ratelimit for unauthenticated requests is 60/h while authenticated is 1000/h."
     required: false
@@ -45,4 +49,5 @@ runs:
     MIN_MINOR: ${{ inputs.minMinor }}
     MIN_PATCH: ${{ inputs.minPatch }}
     EXCLUDE_PRE: ${{ inputs.excludePre }}
+    EXCLUDE_MAJOR: ${{ inputs.excludeMajor }}
     TOKEN: ${{ inputs.token }}
