@@ -34,7 +34,7 @@ Should pre-release versions be excluded. Default: ```true```
 
 ### `excludeMajor`
 
-Should some major versions be excluded. Example ```5,9```
+Should some major versions be excluded. Example ```5 9```
 
 ### `token`
 

@@ -11,7 +11,7 @@ supportedVersionFields = ["TITLE", "TAG-NAME"]
 
 repo = os.environ['REPOSITORY']
 include = os.environ['INCLUDE']
-excludeMajors = os.getenv('EXCLUDE_MAJOR',"").split(",")
+excludeMajors = os.getenv('EXCLUDE_MAJOR',"").split()
 excludePrereleases = os.environ['EXCLUDE_PRE']
 versionField = os.environ['VERSION_FIELD']
 minMajor = os.environ['MIN_MAJOR']
