@@ -11,6 +11,7 @@ supportedVersionFields = ["TITLE", "TAG-NAME"]
 
 repo = os.environ['REPOSITORY']
 include = os.environ['INCLUDE']
+excludeMajors = os.getenv('EXCLUDE_MAJOR',"").split(",")
 excludePrereleases = os.environ['EXCLUDE_PRE']
 versionField = os.environ['VERSION_FIELD']
 minMajor = os.environ['MIN_MAJOR']
@@ -60,6 +61,8 @@ for release in repository.get_releases():
 
     if include == "MAJOR" or include == "MINOR" or include == "PATCH":
         if int(version.major) < int(minMajor): 
+            continue
+        if version.major in excludeMajors:
             continue
         if version.major in majorDict:
             if majorDict[version.major].compare(version) < 1:

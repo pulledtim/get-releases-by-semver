@@ -32,6 +32,10 @@ The minimum patch version to be included. Default: ```0```
 
 Should pre-release versions be excluded. Default: ```true```
 
+### `excludeMajor`
+
+Should some major versions be excluded. Example ```5,9```
+
 ### `token`
 
 Access token to be used when requesting the github-api. Its recommended to use, since the ratelimit for unauthenticated requests is 60/h while authenticated is 1000/h.
